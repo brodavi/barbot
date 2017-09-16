@@ -72,7 +72,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
   if (r.Method == "OPTIONS") {
     w.Header().Set("Access-Control-Allow-Headers", "Authorization")
   } else {
-    fmt.Println(r.URL.Path[1:])
+    fmt.Println(r.URL.Path[1:].Split("/"))
     // if (r.URL.Path[1:] == "make") {
     //   makeDrink(r.URL.Path[2:])
     // } else if (r.URL.Path[1:] == "test") {
