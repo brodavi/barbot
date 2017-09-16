@@ -76,10 +76,11 @@ func handler(w http.ResponseWriter, r *http.Request) {
     w.Header().Set("Access-Control-Allow-Headers", "Authorization")
   } else {
     var path = s.Split(r.URL.Path[1:], "/")
+    p, _ := strconv.ParseInt(path[1], 0, 64)
     if (path[0] == "make") {
-      makeDrink(strconv.ParseInt(path[1], 0, 64))
+      makeDrink(p)
     } else if (path[0] == "test") {
-      toggle(strconv.ParseInt(path[1], 0, 64))
+      toggle(p)
     }
     fmt.Fprintf(w, "Drink complete")
   }
