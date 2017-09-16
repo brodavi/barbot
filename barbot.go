@@ -76,9 +76,9 @@ func handler(w http.ResponseWriter, r *http.Request) {
     w.Header().Set("Access-Control-Allow-Headers", "Authorization")
   } else {
     var path = s.Split(r.URL.Path[1:], "/")
-    p, _ := strconv.ParseInt(path[1], 0, 64)
+    p, _ := strconv.Atoi(path[1])
     if (path[0] == "make") {
-      makeDrink(p)
+      makeDrink(path[1])
     } else if (path[0] == "test") {
       toggle(p)
     }
