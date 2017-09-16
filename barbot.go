@@ -78,7 +78,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
     if (path[0] == "make") {
       makeDrink(path[1])
     } else if (path[0] == "test") {
-      test(path[1])
+      toggle(path[1])
     }
     fmt.Fprintf(w, "Drink complete")
   }
