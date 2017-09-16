@@ -16,6 +16,7 @@ var Multiple = 2
 
 func toggle(pin int) {
   pins[pin].Toggle()
+  fmt.Println("toggling ", pin)
 }
 
 func pour(pin int, ms int) {
