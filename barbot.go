@@ -8,18 +8,17 @@ import (
         "github.com/stianeikeland/go-rpio"
 )
 
-var pins [8]uint8
-
-pins[0] = rpio.Pin(21) // 40 // Tequila
-pins[1] = rpio.Pin(20) // 38 // Vodka
-pins[2] = rpio.Pin(16) // 36 // Gin
-pins[3] = rpio.Pin(12) // 32 // Rum
-pins[4] = rpio.Pin(6) // 31 // Triplesec
-pins[5] = rpio.Pin(13) // 33 // Whiskey
-pins[6] = rpio.Pin(19) // 35 // Sweetnsour
-pins[7] = rpio.Pin(26) // 37 // Coke
-
-func toggle()
+var (
+    Tequila = rpio.Pin(21)
+    Vodka = rpio.Pin(20)
+    Gin = rpio.Pin(16)
+    Rum = rpio.Pin(12)
+    Triplesec = rpio.Pin(6)
+    Whiskey = rpio.Pin(13)
+    Sweetnsour = rpio.Pin(19)
+    Coke = rpio.Pin(26)
+    Multiple = 2
+)
 
 func pour(ingredient string, ms int) {
   switch ingredient {
