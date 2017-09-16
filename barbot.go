@@ -73,7 +73,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
   if (r.Method == "OPTIONS") {
     w.Header().Set("Access-Control-Allow-Headers", "Authorization")
   } else {
-    u = url.Parse(r.URL)
+    var u = url.Parse(r.URL)
     fmt.Println(u)
     fmt.Println(u.Path)
     fmt.Println(r.URL.Path[1:])
