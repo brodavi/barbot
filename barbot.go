@@ -8,6 +8,8 @@ import (
         "github.com/stianeikeland/go-rpio"
 )
 
+import s "strings"
+
 var pins [8]rpio.Pin
 var Multiple = 2
 
@@ -72,7 +74,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
   if (r.Method == "OPTIONS") {
     w.Header().Set("Access-Control-Allow-Headers", "Authorization")
   } else {
-    fmt.Println(r.URL.Path[1:].Split("/"))
+    fmt.Println(s.Split(r.URL.Path[1:], "/"))
     // if (r.URL.Path[1:] == "make") {
     //   makeDrink(r.URL.Path[2:])
     // } else if (r.URL.Path[1:] == "test") {
