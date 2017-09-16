@@ -4,6 +4,7 @@ import (
         "fmt"
         "net/http"
         "os"
+        "strconv"
         "time"
         "github.com/stianeikeland/go-rpio"
 )
@@ -76,9 +77,9 @@ func handler(w http.ResponseWriter, r *http.Request) {
   } else {
     var path = s.Split(r.URL.Path[1:], "/")
     if (path[0] == "make") {
-      makeDrink(path[1])
+      makeDrink(strconv.ParseInt(path[1]))
     } else if (path[0] == "test") {
-      toggle(path[1])
+      toggle(strconv.ParseInt(path[1]))
     }
     fmt.Fprintf(w, "Drink complete")
   }
