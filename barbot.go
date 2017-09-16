@@ -77,9 +77,9 @@ func handler(w http.ResponseWriter, r *http.Request) {
   } else {
     var path = s.Split(r.URL.Path[1:], "/")
     if (path[0] == "make") {
-      makeDrink(strconv.ParseInt(path[1]))
+      makeDrink(strconv.ParseInt(path[1], 0, 64))
     } else if (path[0] == "test") {
-      toggle(strconv.ParseInt(path[1]))
+      toggle(strconv.ParseInt(path[1], 0, 64))
     }
     fmt.Fprintf(w, "Drink complete")
   }
