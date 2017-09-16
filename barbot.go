@@ -3,7 +3,6 @@ package main
 import (
         "fmt"
         "net/http"
-        "net/url"
         "os"
         "time"
         "github.com/stianeikeland/go-rpio"
@@ -73,11 +72,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
   if (r.Method == "OPTIONS") {
     w.Header().Set("Access-Control-Allow-Headers", "Authorization")
   } else {
-    var u = url.Parse(r.URL)
-    fmt.Println(u)
-    fmt.Println(u.Path)
     fmt.Println(r.URL.Path[1:])
-    fmt.Println(r.URL.Path[2:])
     // if (r.URL.Path[1:] == "make") {
     //   makeDrink(r.URL.Path[2:])
     // } else if (r.URL.Path[1:] == "test") {
