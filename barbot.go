@@ -8,134 +8,79 @@ import (
         "github.com/stianeikeland/go-rpio"
 )
 
-var (
-    Tequila = rpio.Pin(21)
-    Vodka = rpio.Pin(20)
-    Gin = rpio.Pin(16)
-    Rum = rpio.Pin(12)
-    Triplesec = rpio.Pin(6)
-    Whiskey = rpio.Pin(13)
-    Sweetnsour = rpio.Pin(19)
-    Coke = rpio.Pin(26)
-    Multiple = 2
-)
+var pins [8]rpio.Pin
+var Multiple = 2
 
-func pour(ingredient string, ms int) {
-  switch ingredient {
-    case "tequila":
-      Tequila.Toggle()
-      time.Sleep(time.Millisecond * time.Duration(ms * Multiple))
-      Tequila.Toggle()
-    case "vodka":
-      Vodka.Toggle()
-      time.Sleep(time.Millisecond * time.Duration(ms * Multiple))
-      Vodka.Toggle()
-    case "gin":
-      Gin.Toggle()
-      time.Sleep(time.Millisecond * time.Duration(ms * Multiple))
-      Gin.Toggle()
-    case "rum":
-      Rum.Toggle()
-      time.Sleep(time.Millisecond * time.Duration(ms * Multiple))
-      Rum.Toggle()
-    case "triplesec":
-      Triplesec.Toggle()
-      time.Sleep(time.Millisecond * time.Duration(ms * Multiple))
-      Triplesec.Toggle()
-    case "whiskey":
-      Whiskey.Toggle()
-      time.Sleep(time.Millisecond * time.Duration(ms * Multiple))
-      Whiskey.Toggle()
-    case "sweetnsour":
-      Sweetnsour.Toggle()
-      time.Sleep(time.Millisecond * time.Duration(ms * Multiple))
-      Sweetnsour.Toggle()
-    case "coke":
-      Coke.Toggle()
-      time.Sleep(time.Millisecond * time.Duration(ms * Multiple))
-      Coke.Toggle()
-  }
+func toggle(pin int) {
+  pins[pin].Toggle()
+}
+
+func pour(pin int, ms int) {
+  pins[pin].Toggle()
+  time.Sleep(time.Millisecond * time.Duration(ms * Multiple))
+  pins[pin].Toggle()
 }
 
 func makeDrink(drinkInt string) {
-
-    switch drinkInt {
-        case "legspreader": //legspreader
-            fmt.Println("making legspreader")
-            pour("tequila", 1000)
-            pour("vodka", 1000)
-            pour("gin", 1000)
-            pour("rum", 1000)
-            fmt.Println("made legspreader")
-        case "flyingdutchman": //flyingdutchman
-            fmt.Println("making flyingdutchman")
-            pour("gin", 2000)
-            pour("triplesec", 500)
-            fmt.Println("made flyingdutchman")
-        case "southbank": //southbank
-            fmt.Println("making southbank")
-            pour("rum", 1000)
-            pour("gin", 1000)
-            fmt.Println("made southbank")
-        case "elgringo": //elgringo
-            fmt.Println("making elgringo")
-            pour("rum", 1000)
-            pour("tequila", 1000)
-            pour("triplesec", 1000)
-            fmt.Println("made elgringo")
-      	case "rumncoke": //rumncoke
-            fmt.Println("making rumncoke")
-            pour("rum", 2000)
-            pour("coke", 2000)
-            fmt.Println("made rumncoke")
-        case "jackncoke": //jackncoke
-            fmt.Println("making jackncoke")
-            pour("whiskey", 2000)
-            pour("coke", 2000)
-            fmt.Println("made jackncoke")
-        case "longisland": //longisland
-            fmt.Println("made longisland")
-            pour("vodka", 1000)
-            pour("tequila", 1000)
-            pour("rum", 1000)
-            pour("triplesec", 1000)
-            pour("sweetnsour", 1500)
-            fmt.Println("made longisland")
-        case "test01": //test tequila
-            pour("tequila", 1500)
-            fmt.Println("tested tequila")
-        case "test02": //test vodka
-            pour("vodka", 1500)
-            fmt.Println("tested vodka")
-        case "test03": //test gin
-            pour("gin", 1500)
-            fmt.Println("tested gin")
-        case "test04": //test rum
-            pour("rum", 1500)
-            fmt.Println("tested rum")
-        case "test05": //test triplesec
-            pour("triplesec", 1500)
-            fmt.Println("tested triplesec")
-        case "test06": //test whisky
-            pour("whisky", 1500)
-            fmt.Println("tested whisky")
-        case "test07": //test sweetnsour
-            pour("sweetnsour", 1500)
-            fmt.Println("tested sweetnsour")
-        case "test08": //test coke
-            pour("coke", 1500)
-            fmt.Println("tested coke")
-    }
+  switch drinkInt {
+    case "legspreader": //legspreader
+        fmt.Println("making legspreader")
+        pour(0, 1000)
+        pour(1, 1000)
+        pour(2, 1000)
+        pour(3, 1000)
+        fmt.Println("made legspreader")
+    case "flyingdutchman": //flyingdutchman
+        fmt.Println("making flyingdutchman")
+        pour(2, 2000)
+        pour(4, 500)
+        fmt.Println("made flyingdutchman")
+    case "southbank": //southbank
+        fmt.Println("making southbank")
+        pour(3, 1000)
+        pour(2, 1000)
+        fmt.Println("made southbank")
+    case "elgringo": //elgringo
+        fmt.Println("making elgringo")
+        pour(3, 1000)
+        pour(0, 1000)
+        pour(4, 1000)
+        fmt.Println("made elgringo")
+  	case "rumncoke": //rumncoke
+        fmt.Println("making rumncoke")
+        pour(3, 2000)
+        pour(7, 2000)
+        fmt.Println("made rumncoke")
+    case "jackncoke": //jackncoke
+        fmt.Println("making jackncoke")
+        pour(5, 2000)
+        pour(7, 2000)
+        fmt.Println("made jackncoke")
+    case "longisland": //longisland
+        fmt.Println("made longisland")
+        pour(1, 1000)
+        pour(0, 1000)
+        pour(3, 1000)
+        pour(4, 1000)
+        pour(6, 1500)
+        fmt.Println("made longisland")
+  }
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-    w.Header().Set("Access-Control-Allow-Origin", "*")
-    if (r.Method == "OPTIONS") {
-      w.Header().Set("Access-Control-Allow-Headers", "Authorization")
-    } else {
-      makeDrink(r.URL.Path[1:])
-      fmt.Fprintf(w, "Drink complete")
-    }
+  w.Header().Set("Access-Control-Allow-Origin", "*")
+  if (r.Method == "OPTIONS") {
+    w.Header().Set("Access-Control-Allow-Headers", "Authorization")
+  } else {
+    fmt.Println(r.URL.Path[1:])
+    fmt.Println(r.URL.Path[2:])
+    // if (r.URL.Path[1:] == "make") {
+    //   makeDrink(r.URL.Path[2:])
+    // } else if (r.URL.Path[1:] == "test") {
+    //   test(r.URL.Path[2:])
+    // }
+    // fmt.Fprintf(w, "Drink complete")
+  }
 }
 
 func initBoard() {
@@ -147,49 +92,57 @@ func initBoard() {
 }
 
 func main() {
-    //init
-    if err := rpio.Open(); err != nil {
-        fmt.Println(err)
-        os.Exit(1)
-    }
+  pins[0] = rpio.Pin(21) // 40 // Tequila
+  pins[1] = rpio.Pin(20) // 38 // Vodka
+  pins[2] = rpio.Pin(16) // 36 // Gin
+  pins[3] = rpio.Pin(12) // 32 // Rum
+  pins[4] = rpio.Pin(6) // 31 // Triplesec
+  pins[5] = rpio.Pin(13) // 33 // Whiskey
+  pins[6] = rpio.Pin(19) // 35 // Sweetnsour
+  pins[7] = rpio.Pin(26) // 37 // Coke
 
-    defer rpio.Close()
+  if err := rpio.Open(); err != nil {
+      fmt.Println(err)
+      os.Exit(1)
+  }
 
-    fmt.Println("Tequila")
-    Tequila.Output()
-    Tequila.High()
+  defer rpio.Close()
 
-    fmt.Println("Vodka")
-    Vodka.Output()
-    Vodka.High()
+  fmt.Println("0")
+  pins[0].Output()
+  pins[0].High()
 
-    fmt.Println("Gin")
-    Gin.Output()
-    Gin.High()
+  fmt.Println("1")
+  pins[1].Output()
+  pins[1].High()
 
-    fmt.Println("Rum")
-    Rum.Output()
-    Rum.High()
+  fmt.Println("2")
+  pins[2].Output()
+  pins[2].High()
 
-    fmt.Println("Triplesec")
-    Triplesec.Output()
-    Triplesec.High()
+  fmt.Println("3")
+  pins[3].Output()
+  pins[3].High()
 
-    fmt.Println("Whiskey")
-    Whiskey.Output()
-    Whiskey.High()
+  fmt.Println("4")
+  pins[4].Output()
+  pins[4].High()
 
-    fmt.Println("Sweetnsour")
-    Sweetnsour.Output()
-    Sweetnsour.High()
+  fmt.Println("5")
+  pins[5].Output()
+  pins[5].High()
 
-    fmt.Println("Coke")
-    Coke.Output()
-    Coke.High()
+  fmt.Println("6")
+  pins[6].Output()
+  pins[6].High()
 
-    fmt.Println("Listening on port 8080")
+  fmt.Println("7")
+  pins[7].Output()
+  pins[7].High()
 
-    //start httplistener
-    http.HandleFunc("/", handler)
-    http.ListenAndServe(":8080", nil)
+  fmt.Println("Listening on port 8080")
+
+  //start httplistener
+  http.HandleFunc("/", handler)
+  http.ListenAndServe(":8080", nil)
 }
