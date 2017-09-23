@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=300, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="font-awesome.min.css">
+    <style>
+    button {
+      width: 300px;
+      height: 100px;
+      margin: 10px;
+    }
+    .loader {
+      display: none;
+    }
+    .btn{
+      font-size: 2em;
+    }
+    .legspreader {
+      background-color: orange;
+      color: black;
+    }
+    .flyingdutchman {
+      background-color: white;
+      border: 1px solid blue;
+      color: black;
+    }
+    .southbank{
+      background-color: black;
+      color: red;
+    }
+    .elgringo {
+      background-color: red;
+      color: black;
+    }
+    .rumncoke {
+      background-color: #CC5F00;
+      color: black;
+    }
+    .jackncoke {
+      background-color: #858567;
+      color: white;
+    }
+    .longisland {
+      background-color: #292929;
+      color: white;
+    }
+    </style>
+  </head>
+  <body>
+    <center>
+      <div class="buttons">
+        <button class="btn btn-primary legspreader" id="make/legspreader">legspreader</button>
+        <button class="btn btn-primary flyingdutchman" id="make/flyingdutchman">flyingdutchman</button>
+        <button class="btn btn-primary southbank" id="make/southbank">southbank</button>
+        <button class="btn btn-primary elgringo" id="make/elgringo">elgringo</button>
+        <button class="btn btn-primary rumncoke" id="make/rumncoke">rumncoke</button>
+        <button class="btn btn-primary jackncoke" id="make/jackncoke">jackncoke</button>
+        <button class="btn btn-primary longisland" id="make/longisland">longisland</button>
+      </div>
+
+      <div class="loader">
+        <br /><br />
+        <h2>Preparing drink.....</h2>
+        <br />
+      </div>
+    </center>
+    <script src="jquery.min.js"></script>
+    <script>
+    $('button').click(function(e){
+      var i = e.target.id;
+      $('.loader').show();
+      $('.buttons').hide();
+      $.ajax('http://' + document.domain + ':8080/' + i, {
+          success: onDrinkResult,
+          error: onDrinkResult
+      });
+    });
+    var onDrinkResult = function(response){
+      $('.loader').hide();
+      $('.buttons').show();
+      $('#myDiv').html(response);
+    }
+    </script>
+  </body>
+</html>

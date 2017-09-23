@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=300, initial-scale=1">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="font-awesome.min.css">
+    <style>
+    button {
+      width: 70px;
+      height: 70px;
+      margin: 5px;
+    }
+    .loader {
+      display: none;
+    }
+    .btn{
+      font-size: 0.7em;
+    }
+    .legspreader {
+      background-color: orange;
+      color: black;
+    }
+    .flyingdutchman {
+      background-color: white;
+      border: 1px solid blue;
+      color: black;
+    }
+    .southbank{
+      background-color: black;
+      color: red;
+    }
+    .elgringo {
+      background-color: red;
+      color: black;
+    }
+    .rumncoke {
+      background-color: #CC5F00;
+      color: black;
+    }
+    .jackncoke {
+      background-color: #858567;
+      color: white;
+    }
+    .longisland {
+      background-color: #292929;
+      color: white;
+    }
+    .prime {
+      background-color: #00ff00;
+      color: red;
+    }
+    .mydiv {
+      margin-top: 25px;
+      margin-bottom: 25px;
+    }
+    .back {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+    }
+    </style>
+  </head>
+  <body>
+    <center>
+      <div class="buttons">
+        <button class="btn btn-primary legspreader" id="make/legspreader">legspreader</button>
+        <button class="btn btn-primary flyingdutchman" id="make/flyingdutchman">flyingdutchman</button>
+        <button class="btn btn-primary southbank" id="make/southbank">southbank</button>
+        <button class="btn btn-primary elgringo" id="make/elgringo">elgringo</button>
+        <button class="btn btn-primary rumncoke" id="make/rumncoke">rumncoke</button>
+        <button class="btn btn-primary jackncoke" id="make/jackncoke">jackncoke</button>
+        <button class="btn btn-primary longisland" id="make/longisland">longisland</button>
+        <div class="mydiv"></div>
+        <button class="btn btn-primary" id="test/0">test 0</button>
+        <button class="btn btn-primary" id="test/1">test 1</button>
+        <button class="btn btn-primary" id="test/2">test 2</button>
+        <button class="btn btn-primary" id="test/3">test 3</button>
+        <button class="btn btn-primary" id="test/4">test 4</button>
+        <button class="btn btn-primary" id="test/5">test 5</button>
+        <button class="btn btn-primary" id="test/6">test 6</button>
+        <button class="btn btn-primary" id="test/7">test 7</button>
+        <div class="mydiv"></div>
+        <button class="btn btn-primary prime" id="prime/0">prime 0</button>
+        <button class="btn btn-primary prime" id="prime/1">prime 1</button>
+        <button class="btn btn-primary prime" id="prime/2">prime 2</button>
+        <button class="btn btn-primary prime" id="prime/3">prime 3</button>
+        <button class="btn btn-primary prime" id="prime/4">prime 4</button>
+        <button class="btn btn-primary prime" id="prime/5">prime 5</button>
+        <button class="btn btn-primary prime" id="prime/6">prime 6</button>
+        <button class="btn btn-primary prime" id="prime/7">prime 7</button>
+      </div>
+
+      <div class="loader">
+        <br /><br />
+        <h2>Preparing drink.....</h2>
+        <br />
+      </div>
+    </center>
+    <div class="back">
+      <a href="/index.html">BACK</a>
+    </div>
+    <script src="jquery.min.js"></script>
+    <script>
+    $('button').click(function(e){
+      var i = e.target.id;
+      $('.loader').show();
+      $('.buttons').hide();
+      $.ajax('http://' + document.domain + ':8080/' + i, {
+          success: onDrinkResult,
+          error: onDrinkResult
+      });
+    });
+    var onDrinkResult = function(response){
+      $('.loader').hide();
+      $('.buttons').show();
+      $('#myDiv').html(response);
+    }
+    </script>
+  </body>
+</html>

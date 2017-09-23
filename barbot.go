@@ -12,16 +12,25 @@ import (
 import s "strings"
 
 var pins [8]rpio.Pin
-var Multiple = 2
+var Prime = 1100
+var Unit = 1650
+var Half = 825
 
 func toggle(pin int) {
   pins[pin].Toggle()
   fmt.Println("toggling ", pin)
 }
 
+func prime(pin int) {
+  pins[pin].Toggle()
+  time.Sleep(time.Millisecond * time.Duration(Prime))
+  pins[pin].Toggle()
+  fmt.Println("priming ", pin)
+}
+
 func pour(pin int, ms int) {
   pins[pin].Toggle()
-  time.Sleep(time.Millisecond * time.Duration(ms * Multiple))
+  time.Sleep(time.Millisecond * time.Duration(ms))
   pins[pin].Toggle()
 }
 
@@ -29,44 +38,44 @@ func makeDrink(drinkInt string) {
   switch drinkInt {
     case "legspreader": //legspreader
         fmt.Println("making legspreader")
-        pour(0, 1000)
-        pour(1, 1000)
-        pour(2, 1000)
-        pour(3, 1000)
+        pour(0, Unit)
+        pour(1, Unit)
+        pour(2, Unit)
+        pour(3, Unit)
         fmt.Println("made legspreader")
     case "flyingdutchman": //flyingdutchman
         fmt.Println("making flyingdutchman")
-        pour(2, 2000)
-        pour(4, 500)
+        pour(2, Unit * 2)
+        pour(4, Half)
         fmt.Println("made flyingdutchman")
     case "southbank": //southbank
         fmt.Println("making southbank")
-        pour(3, 1000)
-        pour(2, 1000)
+        pour(3, Unit)
+        pour(2, Unit)
         fmt.Println("made southbank")
     case "elgringo": //elgringo
         fmt.Println("making elgringo")
-        pour(3, 1000)
-        pour(0, 1000)
-        pour(4, 1000)
+        pour(3, Unit)
+        pour(0, Unit)
+        pour(4, Unit)
         fmt.Println("made elgringo")
   	case "rumncoke": //rumncoke
         fmt.Println("making rumncoke")
-        pour(3, 2000)
-        pour(7, 2000)
+        pour(3, Unit * 2)
+        pour(7, Unit * 2)
         fmt.Println("made rumncoke")
     case "jackncoke": //jackncoke
         fmt.Println("making jackncoke")
-        pour(5, 2000)
-        pour(7, 2000)
+        pour(5, Unit * 2)
+        pour(7, Unit * 2)
         fmt.Println("made jackncoke")
     case "longisland": //longisland
         fmt.Println("made longisland")
-        pour(1, 1000)
-        pour(0, 1000)
-        pour(3, 1000)
-        pour(4, 1000)
-        pour(6, 1500)
+        pour(1, Unit)
+        pour(0, Unit)
+        pour(3, Unit)
+        pour(4, Unit)
+        pour(6, Unit + Half)
         fmt.Println("made longisland")
   }
 }
